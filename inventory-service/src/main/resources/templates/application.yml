@@ -1,0 +1,21 @@
+server:
+  port: 8083
+  error:
+    include-message: always
+    include-binding-errors: always
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://172.18.0.2:3306/inventoryservice?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
+    username: root  
+    password: password
+
+  jpa:
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+    generate-ddl: true
+    show-sql: true
+    hibernate:
+         ddl-auto: update
+
+
+    
