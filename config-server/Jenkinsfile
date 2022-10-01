@@ -15,8 +15,11 @@ pipeline {
         }
         stage('Build Docker image') {
             steps {
-                sh './gradlew docker'
-            }
+                git branch: 'master', url: 'https://github.com/hugojesusmr/microservicesjenkins.git'
+                  dir('config-server') {
+                       sh './gradlew docker'
+                  }
+            }         
         }
         /* stage('Push Docker image') {
             environment {
