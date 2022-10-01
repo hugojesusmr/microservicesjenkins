@@ -9,7 +9,7 @@ plugins {
 
 group = 'com.configserver'
 version = '1'
-sourceCompatibility = '11'
+
 
 repositories {
 	mavenCentral()
@@ -49,4 +49,10 @@ dockerRun {
     image imageName
     ports  '8080:8080'
     clean true
+}
+
+java {
+	toolchain {
+		languageVersion = JavaLanguageVersion.of(11)
+	}
 }
