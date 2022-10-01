@@ -8,7 +8,7 @@ pipeline {
         stage('Build') {
             steps {
                git branch: 'master', url: 'https://github.com/hugojesusmr/microservicesjenkins.git'
-                 dir('configserver') {
+                 dir('config-server') {
                    sh './gradlew assemble'
                }
            }

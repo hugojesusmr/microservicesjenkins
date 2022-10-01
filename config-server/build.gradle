@@ -1,6 +1,6 @@
 plugins {
-	id 'org.springframework.boot' version '2.7.1'
-	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+	id 'org.springframework.boot' version '2.7.2'
+	id 'io.spring.dependency-management' version '1.0.13.RELEASE'
 	id 'java'
 	id "com.palantir.docker" version "0.33.0"
 	id 'com.palantir.docker-run' version '0.33.0'
@@ -8,8 +8,8 @@ plugins {
 }
 
 group = 'com.configserver'
-version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '17'
+version = '1'
+sourceCompatibility = '18'
 
 repositories {
 	mavenCentral()
@@ -17,7 +17,7 @@ repositories {
 }
 
 ext {
-	set('springCloudVersion', "2021.0.0")
+	set('springCloudVersion', "2021.0.3")
 }
 
 dependencies {
@@ -36,6 +36,8 @@ dependencyManagement {
 test {
 	useJUnitPlatform()
 }
+String dockerHubUsernameProperty = findProperty('dockerHubUsername')?: 'hugojesusmr'
+String imageName = "hugojesusmr/config-server:$version"
 docker {
     name imageName
     files "build/libs/${bootJar.archiveFileName.get()}"
