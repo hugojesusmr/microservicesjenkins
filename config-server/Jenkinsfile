@@ -21,14 +21,17 @@ pipeline {
                   }
             }         
         }
-        /* stage('Push Docker image') {
+        stage('Push Docker image') {
             environment {
                 DOCKER_HUB_LOGIN = credentials('docker-hub')
             }
             steps {
-                sh 'docker login --username=$DOCKER_HUB_LOGIN_USR --password=$DOCKER_HUB_LOGIN_PSW'
-                sh './gradlew dockerPush'
+                git branch: 'master', url: 'https://github.com/hugojesusmr/microservicesjenkins.git'
+                  dir('config-server') {
+                    sh 'docker login --username=$DOCKER_HUB_LOGIN_USR --password=$DOCKER_HUB_LOGIN_PSW'
+                    sh './gradlew dockerPush'
+                  }  
             }
-        } */
+        }
     }
 }
