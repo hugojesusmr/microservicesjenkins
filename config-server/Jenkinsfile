@@ -17,7 +17,7 @@ pipeline {
             steps {
                 dir('config-server') {
                     script {
-                         sh 'docker build -t configserver .'
+                         sh './gradlew build docker'
                     }
                 } 
             }        
