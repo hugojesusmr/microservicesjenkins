@@ -1,0 +1,1 @@
+INSERT INTO inventory(id, sku_code,stock) VALUES (1L,"IPHONE_12_GOLD",100);   
