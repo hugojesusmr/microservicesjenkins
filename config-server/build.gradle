@@ -9,7 +9,7 @@ plugins {
 
 group = 'com.configserver'
 version = '1'
-sourceCompatibility = '18'
+sourceCompatibility = '11'
 
 repositories {
 	mavenCentral()
