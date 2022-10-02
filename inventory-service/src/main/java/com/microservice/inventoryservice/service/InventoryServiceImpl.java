@@ -1,7 +1,7 @@
 package com.microservice.inventoryservice.service;
 
 import java.util.List;
-
+import java.util.stream.Collectors;
 import com.microservice.inventoryservice.dto.InventoryResponse;
 import com.microservice.inventoryservice.repository.InventoryRepository;
 import org.springframework.stereotype.Service;
@@ -30,7 +30,7 @@ public class InventoryServiceImpl implements InventoryService{
                                     .skuCode(i.getSkuCode())
                                     .isInStock(i.getQuantity() > 0)
                                     .build()
-                                    ).toList();    
+                                    ).collect(Collectors.toList());  
          
     }
 
