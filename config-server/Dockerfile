@@ -1,4 +1,4 @@
-FROM openjdk:17-alpine
+FROM openjdk:18-ea-11-jdk-slim-bullseye
 VOLUME /tmp
 EXPOSE 8000
 ARG JAR_FILE=build/libs/config-server-1.0.jar
