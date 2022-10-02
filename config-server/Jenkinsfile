@@ -7,19 +7,16 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-              
                    sh './gradlew assemble'
-               
            }
         }
         stage('Build Docker image') {
-            steps {
-                
-                         sh './gradlew docker'
-                    }
+            steps {      
+                     sh './gradlew docker'
+                }
                  
-            }        
-        }
+        }        
+        
         /* stage('Push Docker image') {
             environment {
                 DOCKER_HUB_LOGIN = credentials('docker-hub')
