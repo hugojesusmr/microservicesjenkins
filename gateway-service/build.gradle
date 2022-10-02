@@ -1,19 +1,21 @@
 plugins {
-	id 'org.springframework.boot' version '2.6.3'
-	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+	id 'org.springframework.boot' version '2.7.2'
+	id 'io.spring.dependency-management' version '1.0.13.RELEASE'
 	id 'java'
+	id "com.palantir.docker" version "0.33.0"
+	id 'com.palantir.docker-run' version '0.33.0'
+	id 'pl.allegro.tech.build.axion-release' version '1.13.6' 
 }
 
 group = 'com.gateway'
-version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '17'
+version = '1.0'
 
 repositories {
 	mavenCentral()
 }
 
 ext {
-	set('springCloudVersion', "2021.0.0")
+	set('springCloudVersion', "2021.0.3")
 }
 
 dependencies {
@@ -34,4 +36,24 @@ dependencyManagement {
 
 test {
 	useJUnitPlatform()
+}
+String dockerHubUsernameProperty = findProperty('dockerHubUsername')?: 'hugojesusmr'
+String imageName = "hugojesusmr/gateway-service:$version"
+docker {
+    name imageName
+    files "build/libs/${bootJar.archiveFileName.get()}"
+    buildArgs([JAR_FILE: bootJar.archiveFileName.get()])
+}
+
+dockerRun {
+    name project.name
+    image imageName
+    ports  '8080:8080'
+    clean true
+}
+
+java {
+	toolchain {
+		languageVersion = JavaLanguageVersion.of(11)
+	}
 }
