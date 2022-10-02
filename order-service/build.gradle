@@ -1,12 +1,14 @@
 plugins {
-	id 'org.springframework.boot' version '2.7.3'
+	id 'org.springframework.boot' version '2.7.2'
 	id 'io.spring.dependency-management' version '1.0.13.RELEASE'
 	id 'java'
+	id "com.palantir.docker" version "0.33.0"
+	id 'com.palantir.docker-run' version '0.33.0'
+	id 'pl.allegro.tech.build.axion-release' version '1.13.6'
 }
 
 group = 'com.microserviceorder'
 version = '1.0'
-sourceCompatibility = '18'
 
 configurations {
 	compileOnly {
@@ -33,9 +35,6 @@ dependencies {
 	implementation 'org.springframework.cloud:spring-cloud-starter-sleuth'
 	implementation 'org.springframework.cloud:spring-cloud-starter-config'
     implementation 'org.springframework.kafka:spring-kafka'
-/* 	implementation 'org.springframework.cloud:spring-cloud-starter-openfeign' */
-	/* implementation 'org.springframework.cloud:spring-cloud-starter-loadbalancer' */
-	
 	compileOnly 'org.projectlombok:lombok'
 	runtimeOnly 'mysql:mysql-connector-java'
 	annotationProcessor 'org.projectlombok:lombok'
@@ -49,4 +48,24 @@ dependencyManagement {
 }
 test {
 	useJUnitPlatform()
+}
+String dockerHubUsernameProperty = findProperty('dockerHubUsername')?: 'hugojesusmr'
+String imageName = "hugojesusmr/notification-service:$version"
+docker {
+    name imageName
+    files "build/libs/${bootJar.archiveFileName.get()}"
+    buildArgs([JAR_FILE: bootJar.archiveFileName.get()])
+}
+
+dockerRun {
+    name project.name
+    image imageName
+    ports  '8080:8080'
+    clean true
+}
+
+java {
+	toolchain {
+		languageVersion = JavaLanguageVersion.of(11)
+	}
 }
