@@ -1,6 +1,7 @@
 package com.microservice.productservice.service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import com.microservice.productservice.dto.ProductRequest;
 import com.microservice.productservice.dto.ProductResponse;
@@ -23,7 +24,7 @@ public class ProductServiceImpl implements ProductService {
        return products
                 .stream()
                 .map(this::mapToProductResponse)
-                .toList();
+                .collect(Collectors.toList());
     }
 
     private ProductResponse mapToProductResponse(Product product) {
