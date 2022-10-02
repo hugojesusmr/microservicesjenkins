@@ -7,19 +7,17 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-               git branch: 'master', url: 'https://github.com/hugojesusmr/microservicesjenkins.git'
-                 dir('config-server') {
+              
                    sh './gradlew assemble'
-               }
+               
            }
         }
         stage('Build Docker image') {
             steps {
-                dir('config-server') {
-                    script {
+                
                          sh './gradlew docker'
                     }
-                } 
+                 
             }        
         }
         /* stage('Push Docker image') {
