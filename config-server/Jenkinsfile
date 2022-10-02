@@ -17,7 +17,7 @@ pipeline {
             steps {
                 dir('config-server') {
                     script {
-                         sh './gradlew docker'
+                         sh './gradlew docker --info'
                     }
                 } 
             }        
