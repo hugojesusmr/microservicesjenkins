@@ -50,7 +50,7 @@ test {
 	useJUnitPlatform()
 }
 String dockerHubUsernameProperty = findProperty('dockerHubUsername')?: 'hugojesusmr'
-String imageName = "hugojesusmr/notification-service:$version"
+String imageName = "hugojesusmr/order-service:$version"
 docker {
     name imageName
     files "build/libs/${bootJar.archiveFileName.get()}"
