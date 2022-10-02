@@ -3,7 +3,7 @@ package com.microserviceorder.orderservice.service;
 import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
-
+import java.util.stream.Collectors;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -43,7 +43,7 @@ public class OrderServiceImpl implements OrderService {
         orderRequest.getOrderLineItemsDtoList()
                     .stream()
                     .map(this::mapToDto)
-                    .toList();
+                    .collect(Collectors.toList());
        
        order.setOrderLineItemsList(orderLineItems);        
        System.out.println(order.toString());
@@ -51,7 +51,7 @@ public class OrderServiceImpl implements OrderService {
        order.getOrderLineItemsList()
             .stream()
             .map(OrderLineItems::getSkuCode)
-            .toList();
+            .collect(Collectors.toList());
 
         //Call Inventory Service
         log.info("Calling inventory service");
