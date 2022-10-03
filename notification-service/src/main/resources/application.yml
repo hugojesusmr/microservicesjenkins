@@ -4,6 +4,8 @@ server:
     include-message: always
     include-binding-errors: always
 spring:
+  application:
+    name: notification-service
   zipkin: 
    base-url: http://localhost:9411
              
@@ -25,4 +27,4 @@ eureka:
     serviceUrl:
       default-zone: http://localhost:8761/eureka/
   instance:
-    prefer-ip-address: true 
+     hostname: localhost

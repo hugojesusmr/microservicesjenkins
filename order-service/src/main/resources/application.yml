@@ -4,9 +4,11 @@ server:
     include-message: always
     include-binding-errors: always
 spring:
+  application:
+    name: order-service
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://172.18.0.2:3306/orderservice?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
+    url: jdbc:mysql://localhost:3306/order-service
     username: root
     password: password
   jpa:
