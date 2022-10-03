@@ -7,8 +7,9 @@ spring:
     sampler:
         probability: 1.0
 eureka:
-  instance:
-     prefer-ip-address: true
+  instance: 
+    hostname: localhost
+    
   client:
     register-with-eureka: false
     fetch-registry: false
