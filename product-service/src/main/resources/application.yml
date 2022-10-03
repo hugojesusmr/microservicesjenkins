@@ -1,0 +1,25 @@
+server:
+  port: 8002
+  error:
+    include-message: always
+    include-binding-errors: always
+spring:
+  data:
+    mongodb: 
+        uri: mongodb://admin:admin@localhost:27017/product-service?authSource=admin
+  zipkin: 
+     base-url: http://localhost:9411
+  sleuth:
+     sampler:
+        probability: 1.0  
+
+eureka:
+  client:
+    serviceUrl:
+      default-zone: http://localhost:8761/eureka/
+  instance:
+    hostname: localhost
+management:
+  endpoints:
+      web:
+        include: "*"      
