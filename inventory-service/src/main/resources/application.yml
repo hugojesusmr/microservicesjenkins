@@ -1,19 +1,34 @@
 server:
-  port: 8086
+  port: 8004
 spring:
-  datasource:
+ datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://172.18.0.2:3306/orderservice?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
-    username: root  
-    password: password  
-  jpa:
+    url: jdbc:mysql://172.18.0.2:3306/inventoryservice?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
+    username: root
+    password: password
+  
+ jpa:
     database-platform: org.hibernate.dialect.MySQL8Dialect
     generate-ddl: true
     show-sql: true
     hibernate:
-         ddl-auto: update
+         ddl-auto: update         
+ zipkin: 
+   base-url: http://localhost:9411
+ sleuth:
+   sampler:
+     probability: 1.0              
+     
 eureka:
   client:
     serviceUrl:
-      defaultZone: http://localhost:8761/eureka/
+      default-zone: http://localhost:8761/eureka/
+  instance:
+    hostname: localhost
+
+management:
+  endpoints:
+    web:
+      exposure:
+         include: "*"
     
