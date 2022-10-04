@@ -41,8 +41,7 @@ pipeline {
                     script {
                         sh 'docker rmi hugojesusmr/product-service:1.0'
                     }
-                 }    
-            }
+            }    
         }
     }
 }
