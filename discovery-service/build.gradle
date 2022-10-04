@@ -36,7 +36,7 @@ dependencyManagement {
 }
 
 String dockerHubUsernameProperty = findProperty('dockerHubUsername')?: 'hugojesusmr'
-String imageName = "hugojesusmr/discovery-service:$version"
+String imageName = "${dockerHubUsernameProperty}/discovery-service:$version"
 docker {
     name imageName
     files "build/libs/${bootJar.archiveFileName.get()}"
