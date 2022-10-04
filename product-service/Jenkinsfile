@@ -16,9 +16,9 @@ pipeline {
             steps {
                 dir('product-service') {
                     script {
-                        try{
+                        
                             sh './gradlew docker'
-                        }
+                        
                     }
                 } 
             }        
