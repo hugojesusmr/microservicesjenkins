@@ -1,5 +1,8 @@
 pipeline {
     agent any
+      parameters {
+        string(name: 'image_name', defaultValue: 'pagina_web')
+      }
     triggers {
         pollSCM '* * * * *'
     }
@@ -36,7 +39,7 @@ pipeline {
         stage('Delete Docker image') {
             steps {
                     script {
-                        sh './gradlew dockerRemoveContainer'
+                        sh 'docker rmi hugojesusmr/product-service:1.0'
                     }
                  }    
             }
