@@ -13,9 +13,9 @@ spring:
     sampler:
      probability: 1.0      
   kafka:
+    template:
+      default-topic: notificationTopic
     consumer:
-        template:
-            default: notificationTopic
         bootstrap-servers: localhost:9092
         group-id: notification-Id
         key-deserializer: org.apache.kafka.common.serialization.StringDeserializer

@@ -1,40 +1,43 @@
 ---
-version: '3'
+version: '3.3'
 services:
   ## MySQL Docker Compose Config
   mysql-order:
     container_name: mysql-order
     image: mysql:5.7
+    restart: always
     environment:
       MYSQL_DATABASE: 'order-service'
       MYSQL_USER: 'user'
       MYSQL_PASSWORD: 'password'
       MYSQL_ROOT_PASSWORD: 'password'
-    volumes:
-      - ./mysql-order:/var/lib/mysql
     ports:
       - '3306:3306'
     expose:
       - '3306'
-    command: -p 5431
-    restart: unless-stopped
+    volumes:
+      - mysql-order:/var/lib/mysql
+volumes:
+  mysql-order:
 
   mysql-inventory:
     container_name: mysql-inventory
     image: mysql:5.7
+    restart: always
     environment:
       MYSQL_DATABASE: 'inventory-service'
       MYSQL_USER: 'user'
       MYSQL_PASSWORD: 'password'
       MYSQL_ROOT_PASSWORD: 'password'
-    volumes:
-      - ./mysql-inventory:/var/lib/mysql
     ports:
       - '3307:3307'
     expose:
       - '3307'
-    command: -p 5432
-    restart: unless-stopped
+    volumes:
+      - mysql-inventory:/var/lib/mysql
+volumes:
+  mysql-inventory:  
+    
   ## Mongo Docker Compose Config
   mongo:
     container_name: mongo
@@ -45,18 +48,18 @@ services:
     expose:
       - "27017"
     volumes:
-      - ./mongo-data:/data/db
+      - mongo-data:/data/db
 
   zookeeper:
-    image: confluentinc/cp-zookeeper:7.0.1
     container_name: zookeeper
+    image: confluentinc/cp-zookeeper:7.0.1
     environment:
       ZOOKEEPER_CLIENT_PORT: 2181
       ZOOKEEPER_TICK_TIME: 2000
 
   broker:
-    image: confluentinc/cp-kafka:7.0.1
     container_name: broker
+    image: confluentinc/cp-kafka:7.0.1
     ports:
       - "9092:9092"
     depends_on:
@@ -72,15 +75,15 @@ services:
 
   ## Zipkin
   zipkin:
-    image: openzipkin/zipkin
     container_name: zipkin
+    image: openzipkin/zipkin
     ports:
       - "9411:9411"
 
   ## Eureka Server
   discovery-server:
-    image: hugojesusmr/discovery-service:1.0
     container_name: discovery-server
+    image: hugojesusmr/discovery-service:1.0
     pull_policy: always
     ports:
       - "8761:8761"
@@ -90,16 +93,15 @@ services:
       - zipkin
 
   api-gateway:
+    container_name: api-gateway
     image: hugojesusmr/gateway-service:1.0
-    container_name: gateway-server
     pull_policy: always
     ports:
-      - "8181:8080"
+      - "8005:8005"
     expose:
       - "8181"
     environment:
       - SPRING_PROFILES_ACTIVE=docker
-      - LOGGING_LEVEL_ORG_SPRINGFRAMEWORK_SECURITY= TRACE
     depends_on:
       - zipkin
       - discovery-server
@@ -107,7 +109,7 @@ services:
 
   ## Product-Service Docker Compose Config
   product-service:
-    container_name: product-server
+    container_name: product-service
     image: hugojesusmr/product-service:1.0
     pull_policy: always
     environment:
@@ -124,7 +126,7 @@ services:
     pull_policy: always
     environment:
       - SPRING_PROFILES_ACTIVE=docker
-      - SPRING_DATASOURCE_URL=jdbc:mysql://mysql-order:5431/order-service
+      - SPRING_DATASOURCE_URL=jdbc:mysql://mysql-order:3306/order-service
     depends_on:
       - mysql-order
       - broker
@@ -139,7 +141,7 @@ services:
     pull_policy: always
     environment:
       - SPRING_PROFILES_ACTIVE=docker
-      - SPRING_DATASOURCE_URL=jdbc:mysql://mysql-inventory:5432/inventory-service
+      - SPRING_DATASOURCE_URL=jdbc:mysql://mysql-inventory:3607/inventory-service
     depends_on:
       - mysql-inventory
       - discovery-server
@@ -147,7 +149,7 @@ services:
 
   ## Notification-Service Docker Compose Config
   notification-service:
-    container_name: notification-server
+    container_name: notification-service
     image: hugojesusmr/notification-service:1.0
     pull_policy: always
     environment:
