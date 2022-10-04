@@ -20,7 +20,11 @@ spring:
         group-id: notification-Id
         key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
         value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer    
-        properties.spring.json.type.mapping: event:com.example.notificationservice.OrderPlacedEvent     
+        properties:
+             spring:
+                json:
+                 type:
+                   mapping: event:com.example.notificationservice.OrderPlacedEvent     
 
 eureka:
   client:

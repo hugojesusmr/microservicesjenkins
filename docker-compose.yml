@@ -16,9 +16,7 @@ services:
     expose:
       - '3306'
     volumes:
-      - mysql-order:/var/lib/mysql
-volumes:
-  mysql-order:
+      - ./mysql-order:/var/lib/mysql
 
   mysql-inventory:
     container_name: mysql-inventory
@@ -34,10 +32,8 @@ volumes:
     expose:
       - '3307'
     volumes:
-      - mysql-inventory:/var/lib/mysql
-volumes:
-  mysql-inventory:  
-    
+      - ./mysql-inventory:/var/lib/mysql
+ 
   ## Mongo Docker Compose Config
   mongo:
     container_name: mongo
@@ -48,7 +44,7 @@ volumes:
     expose:
       - "27017"
     volumes:
-      - mongo-data:/data/db
+      - ./mongo-data:/data/db
 
   zookeeper:
     container_name: zookeeper
@@ -121,7 +117,7 @@ volumes:
 
   ## Order-Service Docker Compose Config
   order-service:
-    container_name: order-server
+    container_name: order-service
     image: hugojesusmr/order-service:1.0
     pull_policy: always
     environment:
@@ -136,12 +132,12 @@ volumes:
 
   ## Inventory-Service Docker Compose Config
   inventory-service:
-    container_name: inventory-server
+    container_name: inventory-service
     image: hugojesusmr/inventory-service:1.0
     pull_policy: always
     environment:
       - SPRING_PROFILES_ACTIVE=docker
-      - SPRING_DATASOURCE_URL=jdbc:mysql://mysql-inventory:3607/inventory-service
+      - SPRING_DATASOURCE_URL=jdbc:mysql://mysql-inventory:3307/inventory-service
     depends_on:
       - mysql-inventory
       - discovery-server
