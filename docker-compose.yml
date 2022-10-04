@@ -4,7 +4,7 @@ services:
   ## MySQL Docker Compose Config
   mysql-order:
     container_name: mysql-order
-    image: mysql:5.7
+    image: mysql
     restart: always
     environment:
       MYSQL_DATABASE: 'order-service'
@@ -20,7 +20,7 @@ services:
 
   mysql-inventory:
     container_name: mysql-inventory
-    image: mysql:5.7
+    image: mysql
     restart: always
     environment:
       MYSQL_DATABASE: 'inventory-service'

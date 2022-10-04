@@ -4,7 +4,7 @@ spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://mysql:3306/order-service
-    username: root
+    username: user
     password: password
     
   zipkin: 
