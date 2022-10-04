@@ -4,7 +4,7 @@ services:
   ## MySQL Docker Compose Config
   mysql-order:
     container_name: mysql-order
-    image: mysql
+    image: mysql:5.7
     environment:
       MYSQL_DATABASE: 'order-service'
       MYSQL_USER: 'user'
@@ -21,7 +21,7 @@ services:
 
   mysql-inventory:
     container_name: mysql-inventory
-    image: mysql
+    image: mysql:5.7
     environment:
       MYSQL_DATABASE: 'inventory-service'
       MYSQL_USER: 'user'
@@ -103,7 +103,7 @@ services:
     depends_on:
       - zipkin
       - discovery-server
-      - keycloak
+     
 
   ## Product-Service Docker Compose Config
   product-service:
@@ -141,7 +141,7 @@ services:
       - SPRING_PROFILES_ACTIVE=docker
       - SPRING_DATASOURCE_URL=jdbc:mysql://mysql-inventory:5432/inventory-service
     depends_on:
-      - postgres-inventory
+      - mysql-inventory
       - discovery-server
       - api-gateway
 
