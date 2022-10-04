@@ -16,7 +16,9 @@ pipeline {
             steps {
                 dir('product-service') {
                     script {
-                         sh './gradlew docker'
+                        try{
+                            sh './gradlew docker'
+                        }
                     }
                 } 
             }        
@@ -30,6 +32,15 @@ pipeline {
                     script {
                         sh 'docker login --username=$DOCKER_HUB_LOGIN_USR --password=$DOCKER_HUB_LOGIN_PSW'
                         sh './gradlew dockerPush'
+                    }
+                 }    
+            }
+        }
+        stage('Docker delete image') {
+            steps {
+                 dir('product-service') {
+                    script {                
+                        sh './gradlew dockerRemoveContainer'
                     }
                  }    
             }
