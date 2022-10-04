@@ -21,7 +21,7 @@ pipeline {
                 } 
             }        
         }
-        /* stage('Push Docker image') {
+        stage('Push Docker image') {
             environment {
                 DOCKER_HUB_LOGIN = credentials('docker-hub')
             }
@@ -33,6 +33,6 @@ pipeline {
                     }
                  }    
             }
-        } */
+        }
     }
 }
