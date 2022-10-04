@@ -1,8 +1,5 @@
 pipeline {
     agent any
-      parameters {
-        string(name: 'image_name')
-      }
     triggers {
         pollSCM '* * * * *'
     }
@@ -32,7 +29,14 @@ pipeline {
                     script {
                         sh 'docker login --username=$DOCKER_HUB_LOGIN_USR --password=$DOCKER_HUB_LOGIN_PSW'
                         sh './gradlew dockerPush'
-                        sh './gradlew dockerRemoveContainer ${image_name}'
+                    }
+                 }    
+            }
+        }
+        stage('Delete Docker image') {
+            steps {
+                    script {
+                        sh './gradlew dockerRemoveContainer'
                     }
                  }    
             }
