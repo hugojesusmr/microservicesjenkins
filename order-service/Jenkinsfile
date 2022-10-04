@@ -34,5 +34,12 @@ pipeline {
                  }    
             }
         }
+        stage('Delete Docker image') {
+            steps {
+                    script {
+                        sh 'docker rmi hugojesusmr/order-service:1.0'
+                    }
+            }    
+        }
     }
 }
