@@ -2,7 +2,7 @@ server:
   port: 8004
 spring:
   datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
+    driver-class-name: org.postgresql.Driver
     url: jdbc:postgresql://postgres:5432/inventory-service
     username: user
     password: password
