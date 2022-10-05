@@ -4,7 +4,7 @@ services:
   ## MySQL Docker Compose Config
   mysql-order:
     container_name: mysql-order
-    image: mysql
+    image: mysql:5.7
     restart: always
     environment:
       MYSQL_DATABASE: 'order-service'
@@ -17,10 +17,14 @@ services:
       - '3306'
     volumes:
       - ./mysql-order:/var/lib/mysql
+    command: -p 3306
+    restart: unless-stopped  
+volumes:
+   mysql-order:
 
   mysql-inventory:
     container_name: mysql-inventory
-    image: mysql
+    image: mysql:5.7
     restart: always
     environment:
       MYSQL_DATABASE: 'inventory-service'
@@ -33,7 +37,10 @@ services:
       - '3307'
     volumes:
       - ./mysql-inventory:/var/lib/mysql
- 
+    command: -p 3307
+    restart: unless-stopped  
+volumes:
+    mysql-inventory:
   ## Mongo Docker Compose Config
   mongo:
     container_name: mongo

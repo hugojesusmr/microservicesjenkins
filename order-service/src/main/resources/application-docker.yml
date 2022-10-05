@@ -3,7 +3,7 @@ server:
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://mysql:3306/order-service
+    url: jdbc:mysql://mysql:3306/order-service?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
     username: user
     password: password
     
