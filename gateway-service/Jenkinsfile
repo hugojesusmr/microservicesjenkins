@@ -6,6 +6,13 @@ pipeline {
     }
     stages {
         stage('Build') {
+            stage('Clean') {
+            steps {
+                 dir('gateway-service') {
+                   sh './gradlew clean'
+               }
+           }
+        }
             steps {
                  dir('gateway-service') {
                    sh './gradlew assemble'

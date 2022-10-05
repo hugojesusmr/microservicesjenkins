@@ -21,7 +21,7 @@ services:
 
   mysql-inventory:
     container_name: mysql-inventory
-    image: mysql:5.7
+    image: mysql
     restart: always
     environment:
       MYSQL_DATABASE: 'inventory-service'
@@ -29,9 +29,9 @@ services:
       MYSQL_PASSWORD: 'password'
       MYSQL_ROOT_PASSWORD: 'password'
     ports:
-      - '3307:3307'
+      - '4044:4044'
     expose:
-      - '3307'
+      - '4044'
     volumes:
       - ./mysql-inventory:/var/lib/mysql
     
@@ -139,7 +139,7 @@ services:
     pull_policy: always
     environment:
       - SPRING_PROFILES_ACTIVE=docker
-      - SPRING_DATASOURCE_URL=jdbc:mysql://mysql-inventory:3307/inventory-service
+      - SPRING_DATASOURCE_URL=jdbc:mysql://mysql-inventory:4044/inventory-service
     depends_on:
       - mysql-inventory
       - discovery-server

@@ -4,6 +4,13 @@ pipeline {
         pollSCM '* * * * *'
     }
     stages {
+        stage('Clean') {
+            steps {
+                 dir('product-service') {
+                   sh './gradlew clean'
+               }
+           }
+        }
         stage('Build') {
             steps {
                  dir('product-service') {
