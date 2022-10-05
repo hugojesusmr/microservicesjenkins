@@ -5,14 +5,14 @@ pipeline {
         pollSCM '* * * * *'
     }
     stages {
-        stage('Build') {
-            stage('Clean') {
+        stage('Clean') {
             steps {
                  dir('discovery-service') {
                    sh './gradlew clean'
                }
            }
         }
+        stage('Build') {
             steps {
                  dir('discovery-service') {
                    sh './gradlew assemble'
