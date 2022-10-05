@@ -19,21 +19,19 @@ services:
       - ./mysql-order:/var/lib/mysql
   
 
-  mysql-inventory:
-    container_name: mysql-inventory
-    image: mysql:5.7
-    restart: always
+ postgres-inventory:
+    container_name: postgres-inventory
+    image: postgres
     environment:
-      MYSQL_DATABASE: 'inventory-service'
-      MYSQL_USER: 'user'
-      MYSQL_PASSWORD: 'password'
-      MYSQL_ROOT_PASSWORD: 'password'
-    ports:
-      - '4044:4044'
-    expose:
-      - '4044'
+      POSTGRES_DB: inventory-service
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      PGDATA: /data/postgres
     volumes:
-      - ./mysql-inventory:/var/lib/mysql
+      - ./postgres-inventory:/data/postgres
+    ports:
+      - "5432:5432"
+    restart: unless-stopped
     
 
   ## Mongo Docker Compose Config
@@ -139,9 +137,10 @@ services:
     pull_policy: always
     environment:
       - SPRING_PROFILES_ACTIVE=docker
-      - SPRING_DATASOURCE_URL=jdbc:mysql://mysql-inventory:4044/inventory-service
+       - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres-inventory:5432/inventory-service
     depends_on:
-      - mysql-inventory
+      - zipkin
+      - postgres-inventory
       - discovery-server
       - api-gateway
 
