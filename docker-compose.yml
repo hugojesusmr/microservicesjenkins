@@ -1,11 +1,11 @@
 ---
-version: '3.3'
+version: '3'
 services:
   ## MySQL Docker Compose Config
   mysql-order:
     container_name: mysql-order
     image: mysql:5.7
-    restart: always
+    restart: unless-stopped
     environment:
       MYSQL_DATABASE: 'order-service'
       MYSQL_USER: 'user'
@@ -19,7 +19,7 @@ services:
       - ./mysql-order:/var/lib/mysql
   
 
- postgres-inventory:
+  postgres-inventory:
     container_name: postgres-inventory
     image: postgres
     environment:
@@ -31,6 +31,8 @@ services:
       - ./postgres-inventory:/data/postgres
     ports:
       - "5432:5432"
+    expose:
+      - '5432'  
     restart: unless-stopped
     
 
