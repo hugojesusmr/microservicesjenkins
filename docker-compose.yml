@@ -17,10 +17,7 @@ services:
       - '3306'
     volumes:
       - ./mysql-order:/var/lib/mysql
-    command: -p 3306
-    restart: unless-stopped  
-volumes:
-   mysql-order:
+  
 
   mysql-inventory:
     container_name: mysql-inventory
@@ -37,10 +34,8 @@ volumes:
       - '3307'
     volumes:
       - ./mysql-inventory:/var/lib/mysql
-    command: -p 3307
-    restart: unless-stopped  
-volumes:
-    mysql-inventory:
+    
+
   ## Mongo Docker Compose Config
   mongo:
     container_name: mongo
