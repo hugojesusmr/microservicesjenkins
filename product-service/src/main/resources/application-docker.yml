@@ -3,12 +3,10 @@ server:
 spring:
   data:
     mongodb: 
-       host: mongodb-host
+       host: host.docker.internal
        port: 27017
        database: product-service
-       authentication-database: admin
-       username: root
-       password: root
+       
        
        
   zipkin: 

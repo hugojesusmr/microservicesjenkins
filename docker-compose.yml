@@ -116,6 +116,7 @@ services:
     pull_policy: always
     environment:
       - SPRING_PROFILES_ACTIVE=docker
+      - SPRING_DATASOURCE_URL=mongodb://mongo:27017/product-service
     depends_on:
       - mongo
       - discovery-server
