@@ -3,7 +3,7 @@ server:
 spring:
   data:
     mongodb: 
-       host: host.docker.internal
+       host: mongodb-host.docker.internal
        port: 27017
        database: product-service
        
