@@ -46,7 +46,8 @@ services:
     environment: 
       - MONGO_INITDB_ROOT_USERNAME=admin  
       - MONGO_INITDB_ROOT_PASSWORD=secret 
-
+    volumes:
+      - ./mongo-data:/data/db
   zookeeper:
     container_name: zookeeper
     image: confluentinc/cp-zookeeper:7.0.1

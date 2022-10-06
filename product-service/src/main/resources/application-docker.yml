@@ -3,7 +3,10 @@ server:
 spring:
   data:
     mongodb: 
-       uri: mongo://localhost:27017/product-service?authSgiource=admin
+       host: mongo://localhost:27017/product-service?authSgiource=admin
+       username: admin 
+       password: secret
+       
 
   zipkin: 
     base-url: http://zipkin:9411    
