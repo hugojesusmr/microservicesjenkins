@@ -111,8 +111,13 @@ services:
     image: hugojesusmr/product-service:1.0
     pull_policy: always
     environment:
-      - SPRING_PROFILES_ACTIVE=docker
-      - SPRING_DATASOURCE_URL=mongodb://mongo:27017/product-service
+      - "SPRING_PROFILES_ACTIVE=docker"
+      - "SPRING_DATASOURCE_URL=product-database:27017/product"
+      - "SERVER_PORT=8002"
+      - "SPRING_APPLICATION_NAME=product-service"
+      - "SPRING_DATA_MONGODB_PORT=27017"
+      - "SPRING_DATA_MONGODB_DATABASE=product-service"
+      - "SPRING_DATA_MONGODB_HOST=mongo"
     depends_on:
       - mongo
       - discovery-server
