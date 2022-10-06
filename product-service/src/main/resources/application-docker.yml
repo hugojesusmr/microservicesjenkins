@@ -6,9 +6,6 @@ spring:
        host: mongo
        port: 27017
        database: product-service
-       uri: mongo://admin:secret@monogo:27017/product-service
-       username: admin 
-       password: secret
        
   zipkin: 
     base-url: http://zipkin:9411    
