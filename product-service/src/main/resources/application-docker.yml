@@ -6,7 +6,7 @@ spring:
        host: mongo
        port: 27017
        database: product-service
-       uri: mongo+srv://admin:secret@monogo:27017/product-service?retryWrites=true&w=majority
+       uri: mongo://admin:secret@monogo:27017/product-service
        username: admin 
        password: secret
        
