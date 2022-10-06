@@ -30,7 +30,7 @@ services:
     volumes:
       - ./postgres-inventory:/data/postgres
     ports:
-      - "5432:5432"
+      - '5432:5432'
     expose:
       - '5432'  
     restart: unless-stopped
@@ -40,11 +40,16 @@ services:
   mongo:
     container_name: mongo
     image: mongo:4.4.14-rc0-focal
+    hostname: mongodb-host
     restart: unless-stopped
     ports:
-      - "27017:27017"
+      - '27017:27017'
     expose: 
-      - "27017"  
+      - '27017'  
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=admin
+      - MONGO_INITDB_ROOT_PASSWORD=secret
+      - MONGO_INITDB_DATABASE=product-service  
     volumes:
       - ./mongo-data:/data/db
   zookeeper:
@@ -58,7 +63,7 @@ services:
     container_name: broker
     image: confluentinc/cp-kafka:7.0.1
     ports:
-      - "9092:9092"
+      - '9092:9092'
     depends_on:
       - zookeeper
     environment:
@@ -75,7 +80,7 @@ services:
     container_name: zipkin
     image: openzipkin/zipkin
     ports:
-      - "9411:9411"
+      - '9411:9411'
 
   ## Eureka Server
   discovery-server:
@@ -83,7 +88,7 @@ services:
     image: hugojesusmr/discovery-service:1.0
     pull_policy: always
     ports:
-      - "8761:8761"
+      - '8761:8761'
     environment:
       - SPRING_PROFILES_ACTIVE=docker
     depends_on:
@@ -94,9 +99,9 @@ services:
     image: hugojesusmr/gateway-service:1.0
     pull_policy: always
     ports:
-      - "8005:8005"
+      - '8005:8005'
     expose:
-      - "8181"
+      - '8005'
     environment:
       - SPRING_PROFILES_ACTIVE=docker
     depends_on:

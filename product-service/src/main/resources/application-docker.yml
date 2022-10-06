@@ -3,9 +3,13 @@ server:
 spring:
   data:
     mongodb: 
-       host: mongo
+       host: mongodb-host
        port: 27017
        database: product-service
+       authentication-database: admin
+       username: root
+       password: root
+       
        
   zipkin: 
     base-url: http://zipkin:9411    
