@@ -37,7 +37,7 @@ services:
     
 
   ## Mongo Docker Compose Config
-   mongodb:
+  mongo:
     container_name: mongo
     image: mongo
     restart: always
