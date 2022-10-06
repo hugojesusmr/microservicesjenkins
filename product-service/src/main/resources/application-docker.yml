@@ -6,6 +6,7 @@ spring:
        host: mongo
        port: 27017
        database: product-service
+       uri: mongo://admin:admin@mongo:27017/product-service?authSource=admin
        username: admin 
        password: secret
        
