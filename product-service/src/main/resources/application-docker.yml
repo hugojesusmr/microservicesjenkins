@@ -3,9 +3,10 @@ server:
 spring:
   data:
     mongodb: 
-       host: mongo
+       host: ${MONGO_HOST}
        port: 27017
        database: product-service
+       authentication-database: admin
        
        
        
