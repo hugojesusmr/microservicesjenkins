@@ -11,12 +11,14 @@ services:
       MYSQL_USER: 'user'
       MYSQL_PASSWORD: 'password'
       MYSQL_ROOT_PASSWORD: 'password'
+      MYSQL_ROOT_HOST: '%'
+    command: --default-authentication-plugin=mysql_native_password 
     ports:
       - '3306:3306'
     expose:
       - '3306'
-    volumes:
-      - ./mysql-order:/var/lib/mysql
+    #volumes:
+    #  - ./mysql-order:/var/lib/mysql
   
 
   postgres-inventory:
@@ -27,8 +29,8 @@ services:
       POSTGRES_USER: user
       POSTGRES_PASSWORD: password
       PGDATA: /data/postgres
-    volumes:
-      - ./postgres-inventory:/data/postgres
+    #volumes:
+    #  - ~/postgres-inventory:/data/postgres
     ports:
       - '5432:5432'
     expose:
@@ -45,8 +47,8 @@ services:
       - '27017:27017'
     expose: 
       - '27017'   
-    volumes:
-      - ./mongo-data:/data/db
+    #volumes:
+    #  - ./mongo-data:/data/db
   zookeeper:
     container_name: zookeeper
     image: confluentinc/cp-zookeeper:7.0.1

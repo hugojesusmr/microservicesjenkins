@@ -4,19 +4,23 @@ server:
     include-message: always
     include-binding-errors: always
 spring:
- application:
+  application:
     name: inventory-service
- datasource:
+  datasource:
     driver-class-name: org.postgresql.Driver
     url: jdbc:postgresql://postgres:5432/inventory-service
     username: user
     password: password
-    
- zipkin: 
-   base-url: http://localhost:9411
- sleuth:
-   sampler:
-     probability: 1.0              
+  jpa:
+    properties:
+       hibernate: jdbc.lob.non_contextual_creation= true
+       dialect: org.hibernate.dialect.PostgreSQLDialect
+       ddl-auto: update
+  zipkin: 
+     base-url: http://localhost:9411
+  sleuth:
+     sampler:
+       probability: 1.0              
      
 eureka:
   client:
