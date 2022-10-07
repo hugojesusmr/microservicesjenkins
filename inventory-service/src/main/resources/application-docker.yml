@@ -3,14 +3,17 @@ server:
 spring:
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://postgres:5432/inventory-service
-    username: user
-    password: password
+    url: jdbc:postgresql://postgres:5432/inventoryservice
+    username: postgres
+    password: changeme
   jpa:
+    show-sql: true
+    generate-ddl: true  
+    hibernate:
+      ddl-auto: create
     properties:
-       hibernate: jdbc.lob.non_contextual_creation= true
        dialect: org.hibernate.dialect.PostgreSQLDialect
-       ddl-auto: create
+       hibernate: jdbc.lob.non_contextual_creation= true
     
   zipkin: 
     base-url: http://zipkin:9411    

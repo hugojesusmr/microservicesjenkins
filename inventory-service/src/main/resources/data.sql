@@ -1,1 +1,1 @@
-CREATE DATABASE IF NOT EXISTS 'inventory-service';  
+INSERT INTO inventory(id,skuCode,quantity) VALUES(1,"iphone_13",100);

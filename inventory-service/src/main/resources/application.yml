@@ -8,14 +8,18 @@ spring:
     name: inventory-service
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://postgres:5432/inventory-service
-    username: user
-    password: password
+    url: jdbc:postgresql://172.24.0.3:5432/inventoryservice
+    username: postgres
+    password: changeme
   jpa:
+    show-sql: true
+    generate-ddl: true  
+    hibernate:
+      ddl-auto: create
     properties:
-       hibernate: jdbc.lob.non_contextual_creation= true
        dialect: org.hibernate.dialect.PostgreSQLDialect
-       ddl-auto: update
+       hibernate: jdbc.lob.non_contextual_creation= true
+    
   zipkin: 
      base-url: http://localhost:9411
   sleuth:

@@ -12,6 +12,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
+@Table(name="inventory")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
