@@ -40,7 +40,6 @@ services:
   mongo:
     container_name: mongo
     image: mongo:4.4.14-rc0-focal
-    hostname: mongodb-host
     restart: unless-stopped
     ports:
       - '27017:27017'
