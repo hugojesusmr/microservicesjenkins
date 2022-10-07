@@ -6,7 +6,11 @@ spring:
     url: jdbc:postgresql://postgres:5432/inventory-service
     username: user
     password: password
- 
+  jpa:
+    properties:
+       hibernate: jdbc.lob.non_contextual_creation= true
+       dialect: org.hibernate.dialect.PostgreSQLDialect
+       ddl-auto: create
     
   zipkin: 
     base-url: http://zipkin:9411    
