@@ -61,7 +61,7 @@ public class OrderServiceImpl implements OrderService {
           InventoryResponse[] inventoryResponses = webClient
                    .build()
                    .get()
-                   .uri("http://localhost:8004/api/inventory",
+                   .uri("http://inventory-service/api/inventory",
                         uriBuider->uriBuider.queryParam("skuCode", skuCodes).build())
                    .retrieve()
                    .bodyToMono(InventoryResponse[].class)
