@@ -184,6 +184,7 @@ services:
       - prometheus:prometheus
     volumes:
       - ./grafana:/var/lib/grafana
+    user: "472"
     environment:
       - GF_SECURITY_ADMIN_USER=admin
       - GF_SECURITY_ADMIN_PASSWORD=password
